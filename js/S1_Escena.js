@@ -30,7 +30,7 @@ function init()
     // Motor de render
     renderer = new THREE.WebGLRenderer();
     renderer.setSize( window.innerWidth, window.innerHeight );
-    //renderer.setClearColor( new THREE.Color(0x0000AA) );
+    //renderer.setClearColor( new THREE.Color(0x0000AA) ); //a que color pintar el fondo se puede hacer con scene.background
     document.getElementById('container').appendChild( renderer.domElement );
 
     // Escena
