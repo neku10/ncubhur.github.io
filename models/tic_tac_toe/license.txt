@@ -1,0 +1,11 @@
+Model Information:
+* title:	Tic tac toe
+* source:	https://sketchfab.com/3d-models/tic-tac-toe-12f423126e97495a9e2a688567680e9a
+* author:	burnedhrum (https://sketchfab.com/burnedhrum)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Tic tac toe" (https://sketchfab.com/3d-models/tic-tac-toe-12f423126e97495a9e2a688567680e9a) by burnedhrum (https://sketchfab.com/burnedhrum) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
