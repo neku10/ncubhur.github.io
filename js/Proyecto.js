@@ -87,7 +87,7 @@ function loadScene()
 
     // Organizacion del grafo
     scene.add( board);
-    esferaCubo.add( lineaBoard );
+    board.add( lineaBoard );
     //esferaCubo.add( esfera );
     lineaBoard.add( new THREE.AxesHelper(1) );
     scene.add( new THREE.AxesHelper(3) );
