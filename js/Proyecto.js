@@ -49,7 +49,7 @@ function loadScene()
     cubo.position.x = -1;
     esfera.position.x = 1;*/
     const lineaBoard = new THREE.Mesh( geoLineaBoard, material );
-    lineaBoard.position = 0;
+    lineaBoard.position.x = 0;
 
     // Suelo
     /*const suelo = new THREE.Mesh( new THREE.PlaneGeometry(10,10, 10,10), material );
