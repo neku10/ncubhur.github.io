@@ -70,7 +70,7 @@ function loadScene()
     // Importar un modelo en gltf
     const glloader = new GLTFLoader();
 
-    glloader.load( 'models/tic_tac_toe/cruz2.gltf', function ( gltf ) {
+    glloader.load( 'models/tic_tac_toe/tablero.gltf', function ( gltf ) {
         gltf.scene.position.y = 1;
         gltf.scene.rotation.y = -Math.PI/2;
         esfera.add( gltf.scene );
