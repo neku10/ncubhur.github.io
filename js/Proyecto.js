@@ -39,26 +39,26 @@ function loadScene()
 {
     const material = new THREE.MeshBasicMaterial( { color: 'yellow', wireframe: true } );
 
-    //const geoCubo = new THREE.BoxGeometry( 2,2,2 );
-    //const geoEsfera = new THREE.SphereGeometry( 1, 20,20 );
-    const geoLineaBoard = new THREE.BoxGeometry(64,4,4);
+    const geoCubo = new THREE.BoxGeometry( 2,2,2 );
+    const geoEsfera = new THREE.SphereGeometry( 1, 20,20 );
+    //const geoLineaBoard = new THREE.BoxGeometry(64,4,4);
 
     // Objetos dibujables
-   /* const cubo = new THREE.Mesh( geoCubo, material );
+    const cubo = new THREE.Mesh( geoCubo, material );
     const esfera = new THREE.Mesh( geoEsfera, material );
     cubo.position.x = -1;
-    esfera.position.x = 1;*/
-    const lineaBoard = new THREE.Mesh( geoLineaBoard, material );
-    lineaBoard.position.x = 0;
+    esfera.position.x = 1;
+    //const lineaBoard = new THREE.Mesh( geoLineaBoard, material );
+    //lineaBoard.position.x = 0;
 
     // Suelo
-    /*const suelo = new THREE.Mesh( new THREE.PlaneGeometry(10,10, 10,10), material );
+    const suelo = new THREE.Mesh( new THREE.PlaneGeometry(10,10, 10,10), material );
     suelo.rotation.x = -Math.PI / 2;
     suelo.position.y = -0.1;
     scene.add(suelo);
-*/
+
     // Importar un modelo en json
-    /*const loader = new THREE.ObjectLoader();
+    const loader = new THREE.ObjectLoader();
 
     loader.load( 'models/soldado/soldado.json', 
         function(objeto){
@@ -66,9 +66,9 @@ function loadScene()
             objeto.position.y = 1;
         }
     )
-*/
+
     // Importar un modelo en gltf
-    /*const glloader = new GLTFLoader();
+    const glloader = new GLTFLoader();
 
     glloader.load( 'models/tic_tac_toe/scene.gltf', function ( gltf ) {
         gltf.scene.position.y = 1;
@@ -80,16 +80,16 @@ function loadScene()
         console.error( error );
     
     } );
-*/
+
     // Objeto contenedor
     board = new THREE.Object3D();
     board.position.y = 1.5;
 
     // Organizacion del grafo
     scene.add( board);
-    board.add( lineaBoard );
-    //esferaCubo.add( esfera );
-    lineaBoard.add( new THREE.AxesHelper(1) );
+    board.add( cubo );
+    board.add( esfera );
+    cubo.add( new THREE.AxesHelper(1) );
     scene.add( new THREE.AxesHelper(3) );
 
 }
