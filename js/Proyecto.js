@@ -58,22 +58,43 @@ function loadScene()
     scene.add(suelo);
 
     // Importar un modelo en json
-    const loader = new THREE.ObjectLoader();
+    /*const loader = new THREE.ObjectLoader();
 
     loader.load( 'models/soldado/soldado.json', 
         function(objeto){
             cubo.add(objeto);
             objeto.position.y = 1;
         }
-    )
+    )*/
 
     // Importar un modelo en gltf
     const glloader = new GLTFLoader();
 
-    glloader.load( 'models/tic_tac_toe/prueba_tablero.gltf', function ( gltf ) {
+    glloader.load( 'models/tic_tac_toe/tablero.gltf', function ( gltf ) {
+        gltf.scene.position.y = 1;
+        //gltf.scene.rotation.y = -Math.PI/2;
+        esfera.add( gltf.scene );
+    
+    }, undefined, function ( error ) {
+    
+        console.error( error );
+    
+    } );
+
+    glloader.load( 'models/tic_tac_toe/cruz.gltf', function ( gltf ) {
         gltf.scene.position.y = 1;
         gltf.scene.rotation.y = -Math.PI/2;
-        esfera.add( gltf.scene );
+        cubo.add( gltf.scene );
+    
+    }, undefined, function ( error ) {
+    
+        console.error( error );
+    
+    } );
+    glloader.load( 'models/tic_tac_toe/circulo.gltf', function ( gltf ) {
+        gltf.scene.position.y = 2;
+        gltf.scene.rotation.y = -Math.PI/2;
+        cubo.add( gltf.scene );
     
     }, undefined, function ( error ) {
     
