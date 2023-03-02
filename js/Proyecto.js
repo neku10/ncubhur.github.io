@@ -80,7 +80,7 @@ function loadScene()
         gltf.scene.position.x = -1;
         //gltf.scene.rotation.y = -Math.PI/2;
         //esfera.add( gltf.scene );
-        scene.add(gltf);
+        scene.add(gltf.scene);
     
     }, undefined, function ( error ) {
     
@@ -93,7 +93,7 @@ function loadScene()
         gltf.scene.rotation.y = -Math.PI/2;
         gltf.scene.position.x = 1;
         //cubo.add( gltf.scene );
-        scene.add(gltf);
+        scene.add(gltf.scene);
     
     }, undefined, function ( error ) {
     
@@ -105,7 +105,7 @@ function loadScene()
         gltf.scene.rotation.y = -Math.PI/2;
         gltf.scene.position.x = 1;
         //cubo.add( gltf.scene );
-        scene.add(gltf);
+        scene.add(gltf.scene);
     
     }, undefined, function ( error ) {
     
