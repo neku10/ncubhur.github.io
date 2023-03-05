@@ -101,7 +101,7 @@ function loadScene()
     glloader.load( 'models/tic_tac_toe/tablero.gltf', function ( gltf ) {
         gltf.scene.position.y = 1;
         gltf.scene.position.x = -1;
-        gltf.scene.rotation.y = Math.PI;
+        gltf.scene.rotation.y = 2*Math.PI;
         //esfera.add( gltf.scene );
         scene.add(gltf.scene);
     
