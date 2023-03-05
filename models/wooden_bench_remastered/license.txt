@@ -1,0 +1,11 @@
+Model Information:
+* title:	Wooden Bench (Remastered)
+* source:	https://sketchfab.com/3d-models/wooden-bench-remastered-56cd826c0df3468fa07b868368866a42
+* author:	Memorie (https://sketchfab.com/Memorie)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Wooden Bench (Remastered)" (https://sketchfab.com/3d-models/wooden-bench-remastered-56cd826c0df3468fa07b868368866a42) by Memorie (https://sketchfab.com/Memorie) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

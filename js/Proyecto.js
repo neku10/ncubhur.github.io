@@ -63,6 +63,8 @@ function init()
 //! Carga de objetos y construccion del grafo
 function loadScene()
 {
+    
+    const path ="./images/";
     const material = new THREE.MeshBasicMaterial( { color: 'yellow', wireframe: true } );
 
     //const geoCubo = new THREE.BoxGeometry( 2,2,2 );
@@ -78,11 +80,11 @@ function loadScene()
     //lineaBoard.position.x = 0;
 
     // Suelo
-    const suelo = new THREE.Mesh( new THREE.PlaneGeometry(10,10, 10,10), material );
+    /*const suelo = new THREE.Mesh( new THREE.PlaneGeometry(10,10, 10,10), material );
     suelo.rotation.x = -Math.PI / 2;
     suelo.position.y = -0.1;
     scene.add(suelo);
-
+*/
     // Importar un modelo en json
     /*const loader = new THREE.ObjectLoader();
 
@@ -133,6 +135,17 @@ function loadScene()
         console.error( error );
     
     } );
+    glloader.load( 'models/wooden_bench_remastered/scene.gltf', function ( gltf ) {
+        gltf.scene.position.y = -1;
+        gltf.scene.position.x = -1;
+        //cubo.add( gltf.scene );
+        scene.add(gltf.scene);
+    
+    }, undefined, function ( error ) {
+    
+        console.error( error );
+    
+    } );
 
     // Objeto contenedor
     board = new THREE.Object3D();
@@ -144,6 +157,25 @@ function loadScene()
     //board.add( esfera );
     //cubo.add( new THREE.AxesHelper(1) );
     scene.add( new THREE.AxesHelper(3) );
+
+
+    // Habitacion
+    const paredes = [];
+    paredes.push( new THREE.MeshBasicMaterial({side:THREE.BackSide,
+                    map: new THREE.TextureLoader().load(path+"Skansen3/posx.jpg")}) );
+    paredes.push( new THREE.MeshBasicMaterial({side:THREE.BackSide,
+                    map: new THREE.TextureLoader().load(path+"Skansen3/negx.jpg")}) );
+    paredes.push( new THREE.MeshBasicMaterial({side:THREE.BackSide,
+                    map: new THREE.TextureLoader().load(path+"Skansen3/posy.jpg")}) );
+    paredes.push( new THREE.MeshBasicMaterial({side:THREE.BackSide,
+                    map: new THREE.TextureLoader().load(path+"Skansen3/negy.jpg")}) );
+    paredes.push( new THREE.MeshBasicMaterial({side:THREE.BackSide,
+                    map: new THREE.TextureLoader().load(path+"Skansen3/posz.jpg")}) );
+    paredes.push( new THREE.MeshBasicMaterial({side:THREE.BackSide,
+                    map: new THREE.TextureLoader().load(path+"Skansen3/negz.jpg")}) );
+    const habitacion = new THREE.Mesh( new THREE.BoxGeometry(40,40,40),paredes);
+    scene.add(habitacion);
+
 
 }
 
