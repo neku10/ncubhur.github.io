@@ -32,7 +32,7 @@ function init()
 
     // Instanciar la camara
     camera= new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,1,100);
-    camera.position.set(3,2,7);
+    camera.position.set(1,2,7);
     cameraControls = new OrbitControls( camera, renderer.domElement );
     cameraControls.target.set(0,1,0);
     camera.lookAt(0,1,0);
@@ -101,7 +101,7 @@ function loadScene()
     glloader.load( 'models/tic_tac_toe/tablero.gltf', function ( gltf ) {
         gltf.scene.position.y = 1;
         gltf.scene.position.x = -1;
-        gltf.scene.rotation.y = Math.PI/2;
+        gltf.scene.rotation.y = -Math.PI/2;
         //esfera.add( gltf.scene );
         scene.add(gltf.scene);
     
