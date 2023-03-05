@@ -101,7 +101,7 @@ function loadScene()
     glloader.load( 'models/tic_tac_toe/tablero.gltf', function ( gltf ) {
         gltf.scene.position.y = 1;
         gltf.scene.position.x = -1;
-        gltf.scene.rotation.y = 2*Math.PI;
+        gltf.scene.rotation.y = Math.PI/2;
         //esfera.add( gltf.scene );
         scene.add(gltf.scene);
     
@@ -138,6 +138,7 @@ function loadScene()
     glloader.load( 'models/wooden_bench_remastered/scene.gltf', function ( gltf ) {
         gltf.scene.position.y = 0;
         gltf.scene.position.x = -1;
+        gltf.scene.rotation.y = -Math.PI/2;
         //cubo.add( gltf.scene );
         scene.add(gltf.scene);
     
