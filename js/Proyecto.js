@@ -35,7 +35,7 @@ function init()
     camera.position.set(0.5,2,3);
     cameraControls = new OrbitControls( camera, renderer.domElement );
     cameraControls.target.set(0,1,0);
-    camera.lookAt(4,1,0);
+    camera.lookAt(15,1,4);
 
     // Luces
     const ambiental = new THREE.AmbientLight(0x222222);
