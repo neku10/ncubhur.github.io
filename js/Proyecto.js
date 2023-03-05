@@ -101,7 +101,7 @@ function loadScene()
     glloader.load( 'models/tic_tac_toe/tablero.gltf', function ( gltf ) {
         gltf.scene.position.y = 1;
         gltf.scene.position.x = -1;
-        //gltf.scene.rotation.y = -Math.PI/2;
+        gltf.scene.rotation.y = -Math.PI/2;
         //esfera.add( gltf.scene );
         scene.add(gltf.scene);
     
@@ -136,7 +136,7 @@ function loadScene()
     
     } );
     glloader.load( 'models/wooden_bench_remastered/scene.gltf', function ( gltf ) {
-        gltf.scene.position.y = -1;
+        gltf.scene.position.y = 0;
         gltf.scene.position.x = -1;
         //cubo.add( gltf.scene );
         scene.add(gltf.scene);
@@ -156,7 +156,7 @@ function loadScene()
     //board.add( cubo );
     //board.add( esfera );
     //cubo.add( new THREE.AxesHelper(1) );
-    scene.add( new THREE.AxesHelper(3) );
+    //scene.add( new THREE.AxesHelper(3) );
 
 
     // Habitacion
