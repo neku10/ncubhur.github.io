@@ -34,8 +34,8 @@ function init()
     camera= new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,1,100);
     camera.position.set(0.5,2,3);
     cameraControls = new OrbitControls( camera, renderer.domElement );
-    cameraControls.target.set(10,1,4);
-    camera.lookAt(10,1,4);
+    cameraControls.target.set(0,1,4);
+    camera.lookAt(0,1,4);
 
     // Luces
     const ambiental = new THREE.AmbientLight(0x222222);
