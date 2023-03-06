@@ -139,7 +139,7 @@ function loadScene()
         gltf.scene.position.y = 0;
         gltf.scene.position.x = -1;
         gltf.scene.rotation.y = -Math.PI/2;
-        gltf.scale.set(1.5,1.5,1.5);
+        gltf.scale.set(2,2,2);
         //mesa.add( gltf.scene );
         scene.add(gltf.scene);
     
@@ -186,7 +186,7 @@ function loadScene()
 function update()
 {
     angulo += 0.01;
-    console.log(camera.position);
+    //console.log(camera.position);
     //board.rotation.y = angulo;
 }
 
