@@ -8,7 +8,7 @@ let renderer, scene, camera;
 
 // Otras globales
 let cameraControls, effectController;
-let esferaCubo;
+let mesa;
 let board;
 let angulo = 0;
 
@@ -32,7 +32,7 @@ function init()
 
     // Instanciar la camara
     camera= new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,1,100);
-    camera.position.set(0.5,2,3);
+    camera.position.set(-2.133,2.0422,0.114);
     cameraControls = new OrbitControls( camera, renderer.domElement );
     cameraControls.target.set(0,1,0);
     camera.lookAt(0,1,0);
@@ -66,7 +66,7 @@ function loadScene()
     
     const path ="./images/";
     const material = new THREE.MeshBasicMaterial( { color: 'yellow', wireframe: true } );
-
+    //mesa = new THREE.Object3D();
     //const geoCubo = new THREE.BoxGeometry( 2,2,2 );
     //const geoEsfera = new THREE.SphereGeometry( 1, 20,20 );
     //const geoLineaBoard = new THREE.BoxGeometry(64,4,4);
@@ -139,7 +139,8 @@ function loadScene()
         gltf.scene.position.y = 0;
         gltf.scene.position.x = -1;
         gltf.scene.rotation.y = -Math.PI/2;
-        //cubo.add( gltf.scene );
+        gltf.scale.set(1.5,1.5,1.5);
+        //mesa.add( gltf.scene );
         scene.add(gltf.scene);
     
     }, undefined, function ( error ) {
@@ -149,6 +150,7 @@ function loadScene()
     } );
 
     // Objeto contenedor
+    //scene.add(mesa);
     board = new THREE.Object3D();
     board.position.y = 1.5;
 
