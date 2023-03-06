@@ -139,7 +139,7 @@ function loadScene()
         gltf.scene.position.y = 0;
         gltf.scene.position.x = -1;
         gltf.scene.rotation.y = -Math.PI/2;
-        //gltf.scale.set(200,200,200);
+        gltf.scale.set(2000,2000,2000);
         //mesa.add( gltf.scene );
         scene.add(gltf.scene);
     
