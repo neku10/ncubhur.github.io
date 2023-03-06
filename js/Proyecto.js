@@ -136,7 +136,7 @@ function loadScene()
     
     } );
     glloader.load( 'models/wooden_bench_remastered/scene.gltf', function ( gltf ) {
-        gltf.scene.position.y = 0;
+        gltf.scene.position.y = -0.5;
         gltf.scene.position.x = -1;
         gltf.scene.rotation.y = -Math.PI/2;
         gltf.scene.scale.set(1.5*gltf.scene.scale.x,1.5*gltf.scene.scale.y,1.5*gltf.scene.scale.z);
