@@ -95,6 +95,15 @@ function loadScene()
         }
     )*/
 
+
+    //Area clicable
+    const geoCubo = new THREE.BoxGeometry( 0.2,0.2,0.2 );
+    const cubo = new THREE.Mesh( geoCubo, material );
+    cubo.position.y = 1;
+    cubo.position.x = -0.7
+    scene.add(cubo);
+
+
     // Importar un modelo en gltf
     const glloader = new GLTFLoader();
 
