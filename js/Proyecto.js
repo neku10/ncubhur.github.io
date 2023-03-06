@@ -184,6 +184,7 @@ function loadScene()
 function update()
 {
     angulo += 0.01;
+    console.log(camera.position);
     //board.rotation.y = angulo;
 }
 
