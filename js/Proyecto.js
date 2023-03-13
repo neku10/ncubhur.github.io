@@ -31,7 +31,7 @@ function init()
     scene.background = new THREE.Color(0.5,0.5,0.5);
 
     // Instanciar la camara
-    camera= new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,1,100);
+    camera= new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.5,100);
     camera.position.set(-2.133,2.0422,0.114);
     cameraControls = new OrbitControls( camera, renderer.domElement );
     cameraControls.target.set(0,1,0);
@@ -66,6 +66,9 @@ function loadScene()
     
     const path ="./images/";
     const material = new THREE.MeshBasicMaterial( { color: 'yellow', wireframe: true } );
+    board = new THREE.Object3D();
+    board.position.y = 0.93;
+    board.position.x = -1;
     //mesa = new THREE.Object3D();
     //const geoCubo = new THREE.BoxGeometry( 2,2,2 );
     //const geoEsfera = new THREE.SphereGeometry( 1, 20,20 );
@@ -97,22 +100,70 @@ function loadScene()
 
 
     //Area clicable
-    const geoCubo = new THREE.BoxGeometry( 0.2,0.2,0.2 );
-    const cubo = new THREE.Mesh( geoCubo, material );
-    cubo.position.y = 1;
-    cubo.position.x = -0.7
-    scene.add(cubo);
+    const geoCubo = new THREE.BoxGeometry( 0.15,0.03,0.15 );
+
+        //PRIMERA COLUMNA
+    const cuboNE = new THREE.Mesh( geoCubo, material );
+    cuboNE.position.y = 0.05;
+    cuboNE.position.x = 0.175;
+    cuboNE.position.z = -0.175;
+    board.add(cuboNE);
+
+    const cuboE = new THREE.Mesh( geoCubo, material );
+    cuboE.position.y = 0.05;
+    cuboE.position.z = -0.175;
+    board.add(cuboE);
+
+    const cuboSE = new THREE.Mesh( geoCubo, material );
+    cuboSE.position.y = 0.05;
+    cuboSE.position.x = -0.175;
+    cuboSE.position.z = -0.175;
+    board.add(cuboSE);
+
+        //COLUMNA CENTRAL
+    const cuboN = new THREE.Mesh( geoCubo, material );
+    cuboN.position.y = 0.05;
+    cuboN.position.x = 0.175;
+    board.add(cuboN);
+
+    const cuboC = new THREE.Mesh( geoCubo, material );
+    cuboC.position.y = 0.05;
+    board.add(cuboC);
+
+    const cuboS = new THREE.Mesh( geoCubo, material );
+    cuboS.position.y = 0.05;
+    cuboS.position.x = -0.175;
+    board.add(cuboS);
+
+        //PRIMERA COLUMNA
+    const cuboNO = new THREE.Mesh( geoCubo, material );
+    cuboNO.position.y = 0.05;
+    cuboNO.position.x = 0.175;
+    cuboNO.position.z = 0.175;
+    board.add(cuboNO);
+
+    const cuboO = new THREE.Mesh( geoCubo, material );
+    cuboO.position.y = 0.05;
+    cuboO.position.z = 0.175;
+    board.add(cuboO);
+
+    const cuboSO = new THREE.Mesh( geoCubo, material );
+    cuboSO.position.y = 0.05;
+    cuboSO.position.x = -0.175;
+    cuboSO.position.z = 0.175;
+    board.add(cuboSO);
 
 
     // Importar un modelo en gltf
     const glloader = new GLTFLoader();
 
     glloader.load( 'models/tic_tac_toe/tablero.gltf', function ( gltf ) {
-        gltf.scene.position.y = 1;
-        gltf.scene.position.x = -1;
+        //gltf.scene.position.y = 1;
+        //gltf.scene.position.x = -1;
         gltf.scene.rotation.y = Math.PI/2;
+        board.add(gltf.scene)
         //esfera.add( gltf.scene );
-        scene.add(gltf.scene);
+        //scene.add(gltf.scene);
     
     }, undefined, function ( error ) {
     
@@ -160,8 +211,8 @@ function loadScene()
 
     // Objeto contenedor
     //scene.add(mesa);
-    board = new THREE.Object3D();
-    board.position.y = 1.5;
+    //board = new THREE.Object3D();
+    //board.position.y = 1.5;
 
     // Organizacion del grafo
     scene.add( board);
