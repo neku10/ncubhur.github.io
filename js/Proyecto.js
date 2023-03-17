@@ -2,6 +2,7 @@
 import * as THREE from "../lib/three.module.js";
 import {GLTFLoader} from "../lib/GLTFLoader.module.js";
 import {OrbitControls} from "../lib/OrbitControls.module.js";
+import {TWEEN} from "../lib/tween.module.min.js";
 
 // Variables de consenso
 let renderer, scene, camera;
@@ -10,6 +11,11 @@ let renderer, scene, camera;
 let cameraControls, effectController;
 let mesa;
 let board;
+let piezas;
+let areasClicables;
+let estadoTablero;
+let jugador;
+let contador;
 let angulo = 0;
 
 // Acciones
@@ -58,100 +64,96 @@ function init()
     scene.add(focal);
     scene.add(new THREE.CameraHelper(focal.shadow.camera));
 
+    
+    //renderer.domElement.addEventListener('dblclick', animate );
+    renderer.domElement.addEventListener('dblclick', onClick, false);
+
 }
+
 
 //! Carga de objetos y construccion del grafo
 function loadScene()
 {
     
     const path ="./images/";
-    const material = new THREE.MeshBasicMaterial( { color: 'yellow', wireframe: true } );
+    const material = new THREE.MeshBasicMaterial({color: 'yellow', wireframe: true});
     board = new THREE.Object3D();
+    let cruz1 = new THREE.Object3D();
+    let cruz2 = new THREE.Object3D();
+    let cruz3= new THREE.Object3D();
+    let cruz4= new THREE.Object3D();
+    let cruz5= new THREE.Object3D();
+    let circulo1= new THREE.Object3D();
+    let circulo2= new THREE.Object3D();
+    let circulo3= new THREE.Object3D();
+    let circulo4= new THREE.Object3D();
     board.position.y = 0.93;
     board.position.x = -1;
-    //mesa = new THREE.Object3D();
-    //const geoCubo = new THREE.BoxGeometry( 2,2,2 );
-    //const geoEsfera = new THREE.SphereGeometry( 1, 20,20 );
-    //const geoLineaBoard = new THREE.BoxGeometry(64,4,4);
 
-    // Objetos dibujables
-    /*const cubo = new THREE.Mesh( geoCubo, material );
-    const esfera = new THREE.Mesh( geoEsfera, material );
-    cubo.position.x = -1;
-    esfera.position.x = 1;*/
-    //const lineaBoard = new THREE.Mesh( geoLineaBoard, material );
-    //lineaBoard.position.x = 0;
-
-    // Suelo
-    /*const suelo = new THREE.Mesh( new THREE.PlaneGeometry(10,10, 10,10), material );
-    suelo.rotation.x = -Math.PI / 2;
-    suelo.position.y = -0.1;
-    scene.add(suelo);
-*/
-    // Importar un modelo en json
-    /*const loader = new THREE.ObjectLoader();
-
-    loader.load( 'models/soldado/soldado.json', 
-        function(objeto){
-            cubo.add(objeto);
-            objeto.position.y = 1;
-        }
-    )*/
+    //estado inicial
+    estadoTablero = [[1,1,1],[1,1,1],[1,1,1]];
+    jugador = 'x';
+    contador = 0;
 
 
     //Area clicable
     const geoCubo = new THREE.BoxGeometry( 0.15,0.03,0.15 );
+    areasClicables = new THREE.Group();
 
         //PRIMERA COLUMNA
     const cuboNE = new THREE.Mesh( geoCubo, material );
-    cuboNE.position.y = 0.05;
     cuboNE.position.x = 0.175;
+    cuboNE.position.y = 0.05;
     cuboNE.position.z = -0.175;
-    board.add(cuboNE);
+    areasClicables.add(cuboNE);
 
     const cuboE = new THREE.Mesh( geoCubo, material );
     cuboE.position.y = 0.05;
     cuboE.position.z = -0.175;
-    board.add(cuboE);
+    areasClicables.add(cuboE);
 
     const cuboSE = new THREE.Mesh( geoCubo, material );
     cuboSE.position.y = 0.05;
     cuboSE.position.x = -0.175;
     cuboSE.position.z = -0.175;
-    board.add(cuboSE);
+    areasClicables.add(cuboSE);
 
         //COLUMNA CENTRAL
     const cuboN = new THREE.Mesh( geoCubo, material );
-    cuboN.position.y = 0.05;
     cuboN.position.x = 0.175;
-    board.add(cuboN);
+    cuboN.position.y = 0.05;
+    areasClicables.add(cuboN);
 
     const cuboC = new THREE.Mesh( geoCubo, material );
     cuboC.position.y = 0.05;
-    board.add(cuboC);
+    areasClicables.add(cuboC);
 
     const cuboS = new THREE.Mesh( geoCubo, material );
-    cuboS.position.y = 0.05;
     cuboS.position.x = -0.175;
-    board.add(cuboS);
+    cuboS.position.y = 0.05;
+    areasClicables.add(cuboS);
 
-        //PRIMERA COLUMNA
+        //TERCERA COLUMNA
     const cuboNO = new THREE.Mesh( geoCubo, material );
-    cuboNO.position.y = 0.05;
     cuboNO.position.x = 0.175;
+    cuboNO.position.y = 0.05;
     cuboNO.position.z = 0.175;
-    board.add(cuboNO);
+    areasClicables.add(cuboNO);
 
     const cuboO = new THREE.Mesh( geoCubo, material );
     cuboO.position.y = 0.05;
     cuboO.position.z = 0.175;
-    board.add(cuboO);
+    areasClicables.add(cuboO);
 
     const cuboSO = new THREE.Mesh( geoCubo, material );
-    cuboSO.position.y = 0.05;
     cuboSO.position.x = -0.175;
+    cuboSO.position.y = 0.05;
     cuboSO.position.z = 0.175;
-    board.add(cuboSO);
+    areasClicables.add(cuboSO);
+
+    board.add(areasClicables);
+    console.log('creaareas');
+
 
 
     // Importar un modelo en gltf
@@ -161,6 +163,7 @@ function loadScene()
         //gltf.scene.position.y = 1;
         //gltf.scene.position.x = -1;
         gltf.scene.rotation.y = Math.PI/2;
+        gltf.scene.name = 'tablero';
         board.add(gltf.scene)
         //esfera.add( gltf.scene );
         //scene.add(gltf.scene);
@@ -170,25 +173,36 @@ function loadScene()
         console.error( error );
     
     } );
-
     glloader.load( 'models/tic_tac_toe/cruz.gltf', function ( gltf ) {
-        gltf.scene.position.y = 1;
+        //gltf.scene.position.y = 1;
         gltf.scene.rotation.y = -Math.PI/2;
-        gltf.scene.position.x = 1;
+        //gltf.scene.position.x = 1;
+        gltf.scene.name = 'cruz';
         //cubo.add( gltf.scene );
-        scene.add(gltf.scene);
-    
+        cruz1.add(gltf.scene);
+        cruz2.add(gltf.scene.clone());
+        cruz3.add(gltf.scene.clone());
+        cruz4.add(gltf.scene.clone());
+        cruz5.add(gltf.scene.clone());
+        
     }, undefined, function ( error ) {
     
         console.error( error );
     
     } );
+
+    
     glloader.load( 'models/tic_tac_toe/circulo.gltf', function ( gltf ) {
-        gltf.scene.position.y = 2;
+        //gltf.scene.position.y = 2;
         gltf.scene.rotation.y = -Math.PI/2;
-        gltf.scene.position.x = 1;
+        //gltf.scene.position.x = 1;
         //cubo.add( gltf.scene );
-        scene.add(gltf.scene);
+        //scene.add(gltf.scene);
+        circulo1.add(gltf.scene);
+        circulo2.add(gltf.scene.clone());
+        circulo3.add(gltf.scene.clone());
+        circulo4.add(gltf.scene.clone());
+
     
     }, undefined, function ( error ) {
     
@@ -215,7 +229,9 @@ function loadScene()
     //board.position.y = 1.5;
 
     // Organizacion del grafo
+    piezas = [cruz1, circulo1, cruz2, circulo2, cruz3, circulo3, cruz4, circulo4, cruz5];
     scene.add( board);
+
     //board.add( cubo );
     //board.add( esfera );
     //cubo.add( new THREE.AxesHelper(1) );
@@ -241,13 +257,102 @@ function loadScene()
 
 
 }
+function onClick(event){
+    let x= event.clientX;
+    let y = event.clientY;
+    x = ( x / window.innerWidth ) * 2 - 1;
+    y = -( y / window.innerHeight ) * 2 + 1;
+    const rayo = new THREE.Raycaster();
+    rayo.setFromCamera(new THREE.Vector2(x,y), camera);
+    let intersecciones = rayo.intersectObjects(areasClicables.children,true);
+    console.log('hola mundito');
+    console.log(intersecciones);
+
+    if( intersecciones.length > 0 ){
+        let index = areasClicables.children.findIndex((c) => c.uuid === intersecciones[0].object.uuid);
+        console.log(intersecciones[0].object.position);
+        addPiece(intersecciones[0]);
+        areasClicables.children.splice(index,1);
+        contador++;
+    }
+}
+//añade una pieza al tablero en el area clicada con doble click
+function addPiece(casilla){
+    console.log('jugador actual = ', jugador);
+    if (jugador == 'x'){
+        jugador = 'o';
+
+    }else{
+        jugador = 'x';
+
+    }
+    //movemos la pieza y la añadimos al tablero
+    piezas[contador].position.copy(casilla.object.position);
+    board.add(piezas[contador]);
+}
+
+function animate(event)
+{
+    // Capturar y normalizar
+    let x= event.clientX;
+    let y = event.clientY;
+    x = ( x / window.innerWidth ) * 2 - 1;
+    y = -( y / window.innerHeight ) * 2 + 1;
+    let intersectionPoint = new THREE.Vector3();
+
+    // Construir el rayo y detectar la interseccion
+    const rayo = new THREE.Raycaster();
+    rayo.setFromCamera(new THREE.Vector2(x,y), camera);
+    const tablero = scene.getObjectByName('tablero');
+    //const robot = scene.getObjectByName('robota');
+    let intersecciones = rayo.intersectObjects(tablero.children,true);
+    let planeNormal = new THREE.Vector3();
+    planeNormal.copy(camera.position).normalize();
+    let plane = new THREE.Plane();
+    plane.setFromNormalAndCoplanarPoint(planeNormal,scene.position);
+    //var vec = rayo.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0, 1, 0)), intersectionPoint);
+    rayo.ray.intersectPlane(plane, intersectionPoint);
+
+    
+
+    if( intersecciones.length > 0 ){
+        /*new TWEEN.Tween( tablero.position ).
+        to( {x:[0,0],y:[3,1],z:[0,0]}, 2000 ).
+        interpolation( TWEEN.Interpolation.Bezier ).
+        easing( TWEEN.Easing.Bounce.Out ).
+        start();
+        */
+        //cruz.position.x=intersectionPoint.x;
+        //cruz.position.y=intersectionPoint.y;
+        //cruz.position.z=intersectionPoint.z;
+        
+        board.add( cruz);
+        cruz.position.copy(intersectionPoint);
+        
+    }
+/*
+    intersecciones = rayo.intersectObjects(robot.children,true);
+
+    if( intersecciones.length > 0 ){
+        new TWEEN.Tween( robot.rotation ).
+        to( {x:[0,0],y:[Math.PI,-Math.PI/2],z:[0,0]}, 5000 ).
+        interpolation( TWEEN.Interpolation.Linear ).
+        easing( TWEEN.Easing.Exponential.InOut ).
+        start();
+    }*/
+
+    
+    
+
+}
 
 //! Etapa de actualizacion para cada frame
 function update()
 {
     angulo += 0.01;
     //console.log(camera.position);
-    //board.rotation.y = angulo;
+    //board.rotation.y = angulo;   
+    TWEEN.update();
 }
 
 //! Callback de refresco (se encola a si misma)
